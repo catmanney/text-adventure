@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+Welcome beta-tester!<br>
+Here is a link to my current game: <a href="https://www.catmanney.com/text-adventure/text_adventure_html">current text-adventure game</a><br>
+This project was super intense. It took nearly a two full weeks longer to complete than I anticipated. However, I have much more confindence in my programming skills than when I initially began the project, and I had an additional week to metally explore the halls of this high school during my leisure time.<br>
+There are six commands that the player can utilize within the scope of this game:<br>
+-direction<br>
+ -north, type "north"<br>
+ -east, "east"<br>
+ -south, "south"<br>
+ -west, "west"<br>
+ -up, "up" <br>
+ -down, "down"<br>
+ -if you type these six commands, but that particular area doesn't support the direction, the error will be "valid direction, just not available here"<br>
+ -if you type something other than one of these six commands, the program will not know that you are trying to navigate. most likely the errow will be [default block]<br>
+ -successfully entering a room should display room name, description of room, and list of directions you can go<br>
+ <br>
+-take(+item)<br>
+ -you must use the take word in front of the item you are trying to take. else it will not know you are trying to take an item.<br>
+ -if you use the take word, but the room doesn't have the item you entered, it should say "item ___ not in room"<br>
+ -if you simply enter the item with no take command, the program will not know that you are trying to take an item. the error would be [default block]<br>
+ -if an item is removed successfully, that item will be removed from the array of that object. thus, if you try to take that same item a second time, "item ___ not in room" will be displayed<br>
+ -if the item is in the room but cannot be removed, [item cannot be removed] should display<br>
+  -if the item should not be removed but gets added to inventory, we've got a problem...<br>
+  <br>
+-examine(shows items in room)<br>
+ -pretty simple, if there are items in the room, typing examine will display a list of those items, with a nice description of each. if the room contains no items, a "no items in this room" message will display<br>
+ <br>
+-inventory(shows items in inventory)<br>
+ -also pretty simple, typing inventory will display a list of items in your inventory with a description of each item. If your inventory has no items, a little "inventory empty" message will be displayed<br>
+ <br>
+-use(following the syntax of *use one on two*)<br>
+ -this one is a little tricky, so I've made it as simple as I possibly can, both for developer and client. <br>
+  -most important thing to know is that this program uses whitespace to distinguish sections in user input. If the whitespace is tampered with too much, errors will arise. Thus EVERY ITEM used in this game is either only one word, or, if two words (like "eyeglass case"), those two words must be linked with a dash ("eyeglass-case"). every reference to these items will use this same "dash-syntax", so I hope this makes it easier to remember. I will remind you as many times as I can throughout the game. I would like to have done something different, but seeing as my students are pretty new to coding, I wanted to make this as simple as possible.<br>
+ -the use statement must follow the syntax of "use item-one on item-two".<br>
+  -if the 'use' and 'on' words are used incorrectly, a [syntax looks a little strange] error will display<br>
+  -if the 'use on' syntax is correct, but the items are incorrect, a [syntax correct, items a little off] message will display<br>
+  -on a little side note, getting the first wrong and the second item wrong may result in different kinds of error messages. this isn't such a big deal, all the player needs to know is that their items are wrong, but it's an interesting little thing to play around with<br>
+  -if you don't have the first item, [item one not in iventory will display].<br>
+   -the program evaluates the first item before evaulating the second one. so if there is an issue with item two, you will not find out unless item one is correct. if both items have problems, only the first error will display<br>
+ -every use case in the game involves using one item on another item. you will never use only one item<br>
+ -the first item must be in inventory.<br>
+  -the second item will be either in inventory, or if the item cannot be taken, it will be in a room. if the item is in a room, you must be in that room in order to use it. if you try to use a room-item while outside of that room [item not in room, please find room] should display.<br>
+  -if one or both items are not in inventory, [not in inventory] should display<br>
+  <br>
+-help(if you get stuck, which you probably will haha)<br>
+ -simply scroll to top of page. link to this page<br>
+
+<br>
+simple html notes:<br>
+-a button has been provided for submitting input, but pressing 'enter' key should also work. try both to see what you like better.<br>
+-the game automatically scrolls to the bottom of the page after each move. the game keeps adding text to a div element. when that element gets larger than the scope of the page, it schould automatically scroll down so that the button is always at the bottom of the page.<br>
+-I have played this a bit on smartphone. Not as fun as computer, but it seems to function well. Let me know if you seee issues.<br>
+-unnecessary capitalization can be tolerated, but misspelling, punctuation and whitespace errors cannot. I frequently use quotation marks ("") to explain concepts in the help sections, but they are never used in the game.<br>
+-after completing an action, try typing the same test to repeat that action. You shouldn't be allowed to do so. Either the item should be removed from inventory, or you should get a message saying you've already done that (ex: You've already fixed the faucet.)<br>
+SPOILERS AHEAD:<br>
+-school map<br>
+-the hidden room<br>
+-what items are in each room<br>
+-what actions can be taken with each item<br>
+ <br>
+-THE FOLLOWING BUTTON WILL SHOW YOU SCHOOL MAP AND SPOILERS<br>
+<br>
+<button value="SPOILERS and MAP" onclick="spoilers()">click for SPOILERS</button>
+<div id="spoil_text"></div>
+<script>
+    function spoilers(){
+        document.getElementById("spoil_text").innerHTML += 
+'<p>'+ "Our game has four story portions: "
++'<p>'+"1: MAKING TEA"
++'<p>'+"    Items:<br>"
++'<p>'+"    -wrench from storage_closet"
++'<p>'+"    -teapot from Tea Room"
++'<p>'+"    -tea-leaves from Tea Room"
++'<p>'+"    -matchbox from Ballroom 2"
++'<p>'+"    -bad-art from Art Room"
++'<p>'+"    Actions:"
++'<p>'+"    -use wrench to fix faucet in science_lab"
++'<p>'+"    -use teapot on faucet (to get water)"
++'<p>'+"    -use bad_art on fireplace"
++'<p>'+"    -use matchbox on fireplace"
++'<p>'+"     -using matchbox on bad_art?"
++'<p>'+"    -use teapot on fireplace (contains everything and fire started)"
++'<p>'+"    -use tea_leaves on teapot"
++'<p>'+"    -tea is brewed, secret basement passage opens"
++'<p>'+"    "
++'<p>'+"2: WORKING WITH TECH"
++'<p>'+"    Items:"
++'<p>'+"    -engin-book (Library 1)"
++'<p>'+"    -password-list (Main Entrance)"
++'<p>'+"    -hairbrush (Restroom)"
++'<p>'+"    -sheet-music (Ballroom 1)"
++'<p>'+"    -key (Stairwell 1)"
++'<p>'+"    Actions:"
++'<p>'+"    -use engin-book on computer"
++'<p>'+"   -use password-list on computer"
++'<p>'+"    -use hairbrush on piano"
++'<p>'+"    -use sheet music on piano"
++'<p>'+"    -piano plays music, statue is moved revealing door (Hallway_2A)"
++'<p>'+"    -candle is placed in music hall, take candle"
++'<p>'+"    -use key on door"
++'<p>'+"    -door in hallway-2A unlocked, revealing courtyard"
++'<p>'+"    "
++'<p>'+"3: HELPING A LITTLE FRIEND"
++'<p>'+"    Items:"
++'<p>'+"    -paper (Theater 1)"
++'<p>'+"    -origami-book (Library 2)"
++'<p>'+"    Actions:"
++'<p>'+"    -use origami-book on paper"
++'<p>'+"    -use paper on kid (Theater 2)"
++'<p>'+"    -kid gives you an apple"
++'<p>'+"    -take apple"
++'<p>'+"    -window in Stairwell 2 opens, revealing courtyard"
++'<p>'+"    (Warning: entering 'take kid' will tell the program that you are trying to kidnap the child. If you type this again after the warning, the page will refresh and you will lose all of your progress. Type at your own risk.)"
++'<p>'+"    "
++'<p>'+"4: GETTING SOME ANSWERS"
++'<p>'+"    Items:"
++'<p>'+"    -key (stairwell one, used to unlock door in hallway 2A)"
++'<p>'+"    -candle (music hall)"
++'<p>'+"   -apple (theater 2)"
++'<p>'+"    -teapot (tea room, brewed in classroom)"
++'<p>'+"    -matchbox (Ballroom 1?)"
++'<p>'+"    Actions:"
++'<p>'+"    -enter courtyard from any entrance"
++'<p>'+"    -use candle on altar"
++'<p>'+"    -use apple on altar"
++'<p>'+"    -use (brewed tea) teapot on altar"
++'<p>'+"    -light candle"
++'<p>'+"    -you win! more dialogue should be displayed." 
++'<p>'+"<img src='https://www.catmanney.com/text-adventure/school-map.jpg' width='875' height='1250'>"
++'<p>'+"SPOILERS DONE:"
+
+    }
+</script>
